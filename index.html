@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iPhonecell.shop.uy — Catálogo</title>
+<meta name="description" content="iPhones sellados y usados en Uruguay. Envíos a todo el país.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0D10;
+    --bg-soft:#12161B;
+    --card:#171B22;
+    --ink:#F4F5F7;
+    --ink-soft:#92A0B3;
+    --line:rgba(255,255,255,0.08);
+    --accent:#4F7CFF;
+    --accent-soft:rgba(79,124,255,0.14);
+    --gold:#E3B873;
+    --green:#36D399;
+    --radius:20px;
+    --container:1140px;
+    --font-display:'Sora', sans-serif;
+    --font-body:'Inter', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--font-body);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;}
+  a{color:inherit;}
+  .container{max-width:var(--container);margin:0 auto;padding:0 24px;}
+  section{padding:88px 0;}
+  @media (max-width:640px){ section{padding:56px 0;} }
+
+  h1,h2,h3{font-family:var(--font-display);font-weight:700;line-height:1.15;letter-spacing:-0.01em;}
+  .eyebrow{
+    font-family:var(--font-body);font-size:0.78rem;font-weight:700;
+    letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);
+    display:block;margin-bottom:14px;
+  }
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:14px 26px;border-radius:999px;font-weight:600;text-decoration:none;
+    font-size:0.95rem;border:1.5px solid transparent;cursor:pointer;
+    transition:transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .btn-primary{background:var(--accent);color:#fff;}
+  .btn-primary:hover{transform:translateY(-2px);background:#3d68e8;}
+  .btn-ghost{border-color:var(--line);color:var(--ink);background:rgba(255,255,255,0.03);}
+  .btn-ghost:hover{border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.06);}
+
+  /* ---------- PREVIEW BANNER ---------- */
+  .preview-bar{
+    position:sticky;top:0;z-index:60;
+    background:var(--accent);color:#fff;
+    font-family:var(--font-body);font-size:0.85rem;font-weight:600;
+    text-align:center;padding:10px 16px;
+  }
+  .preview-bar a{text-decoration:underline;}
+
+  /* ---------- TOPBAR ---------- */
+  .topbar{
+    position:sticky;top:38px;z-index:50;
+    background:rgba(11,13,16,0.75);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;flex-wrap:wrap;padding:16px 24px;
+  }
+  .mark{
+    font-family:var(--font-display);font-weight:800;font-size:1.15rem;
+    text-decoration:none;letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;
+  }
+  .mark .dot{width:10px;height:10px;border-radius:50%;background:var(--green);}
+  .topnav{display:flex;gap:28px;font-size:0.9rem;color:var(--ink-soft);}
+  .topnav a{text-decoration:none;transition:color .2s;}
+  .topnav a:hover{color:var(--ink);}
+  @media (max-width:760px){ .topnav{display:none;} }
+
+  /* ---------- HERO ---------- */
+  .hero{padding-top:80px;padding-bottom:60px;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center;}
+  @media (max-width:880px){ .hero-grid{grid-template-columns:1fr;} }
+  .hero h1{font-size:clamp(2.4rem,5.2vw,3.8rem);margin-bottom:20px;}
+  .hero h1 .accent{color:var(--accent);}
+  .hero p.lead{font-size:1.1rem;color:var(--ink-soft);max-width:480px;margin-bottom:32px;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+
+  /* ---------- PHONE MOCKUP ---------- */
+  .phone{
+    --pcolor:#1d1d1f; --pscreen:#2a2a2d;
+    width:148px;height:300px;border-radius:34px;
+    background:linear-gradient(155deg,var(--pcolor),#000 130%);
+    border:2px solid rgba(255,255,255,0.12);
+    position:relative;box-shadow:0 24px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+    flex-shrink:0;
+  }
+  .phone .screen{
+    position:absolute;inset:7px;border-radius:28px;
+    background:linear-gradient(160deg,var(--pscreen),var(--pcolor) 80%);
+    overflow:hidden;
+  }
+  .phone .island{
+    position:absolute;top:14px;left:50%;transform:translateX(-50%);
+    width:46px;height:14px;background:#000;border-radius:10px;z-index:2;
+  }
+  .phone .screen-glow{
+    position:absolute;inset:0;
+    background:radial-gradient(circle at 30% 20%, rgba(255,255,255,0.18), transparent 60%);
+  }
+  .phone .home{
+    position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
+    width:90px;height:4px;border-radius:4px;background:rgba(255,255,255,0.35);
+  }
+
+  .hero-stage{position:relative;height:380px;display:flex;align-items:center;justify-content:center;}
+  .hero-stage .phone{position:absolute;}
+  .hp-1{ --pcolor:#1d1d1f;--pscreen:#3a3c40; transform:rotate(-12deg) translate(-70px,10px); z-index:1; }
+  .hp-2{ --pcolor:#3a5a78;--pscreen:#5d85ac; transform:rotate(2deg) translateY(-30px); z-index:3; }
+  .hp-3{ --pcolor:#9a2e35;--pscreen:#c4555c; transform:rotate(13deg) translate(70px,18px); z-index:2; }
+  .price-float{
+    position:absolute;background:var(--card);border:1px solid var(--line);
+    border-radius:14px;padding:10px 16px;font-family:var(--font-display);
+    font-weight:700;font-size:0.9rem;box-shadow:0 12px 30px rgba(0,0,0,0.4);
+  }
+  .pf-1{top:18px;left:6px;color:var(--green);}
+  .pf-2{bottom:10px;right:0;color:var(--gold);}
+  @media (max-width:880px){ .hero-stage{height:300px;transform:scale(0.85);} }
+  @media (max-width:480px){ .hero-stage{transform:scale(0.7);height:260px;} }
+
+  /* ---------- STATS ---------- */
+  .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg-soft);}
+  .stats .container{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;padding:40px 24px;
+  }
+  @media (max-width:760px){ .stats .container{grid-template-columns:repeat(2,1fr);} }
+  .stat-num{font-family:var(--font-display);font-size:1.8rem;font-weight:800;color:var(--ink);}
+  .stat-label{font-size:0.8rem;color:var(--ink-soft);margin-top:4px;}
+
+  /* ---------- CATALOG ---------- */
+  .catalog-head{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:40px;}
+  .catalog-head h2{font-size:clamp(1.8rem,3.6vw,2.6rem);}
+  .catalog-head p{color:var(--ink-soft);max-width:420px;}
+
+  .catalog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:960px){ .catalog-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .catalog-grid{grid-template-columns:1fr;} }
+
+  .pcard{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;display:flex;flex-direction:column;gap:16px;
+    transition:transform .2s ease, border-color .2s ease;
+  }
+  .pcard:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.18);}
+  .pcard-top{display:flex;align-items:center;justify-content:center;height:200px;}
+  .pcard .phone{width:108px;height:218px;border-radius:26px;}
+  .pcard .phone .island{width:34px;height:10px;top:10px;}
+  .pcard-badges{display:flex;gap:8px;flex-wrap:wrap;}
+  .badge{
+    font-size:0.7rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;
+    padding:5px 10px;border-radius:999px;
+  }
+  .badge-sealed{background:rgba(54,211,153,0.14);color:var(--green);}
+  .badge-used{background:rgba(227,184,115,0.14);color:var(--gold);}
+  .pcard h3{font-size:1.15rem;}
+  .pcard .specs{font-size:0.85rem;color:var(--ink-soft);}
+  .pcard .price-row{
+    display:flex;align-items:baseline;justify-content:space-between;
+    border-top:1px solid var(--line);padding-top:14px;margin-top:auto;
+  }
+  .pcard .price{font-family:var(--font-display);font-size:1.4rem;font-weight:800;}
+  .pcard .price small{font-family:var(--font-body);font-size:0.75rem;font-weight:500;color:var(--ink-soft);display:block;margin-top:2px;}
+  .pcard .consult{
+    font-size:0.82rem;font-weight:600;color:var(--accent);text-decoration:none;
+    display:flex;align-items:center;gap:6px;
+  }
+  .pcard .consult svg{width:16px;height:16px;}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .how{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px;}
+  @media (max-width:760px){ .how-grid{grid-template-columns:1fr;} }
+  .how-step .num{
+    font-family:var(--font-display);font-size:0.85rem;font-weight:800;color:var(--accent);
+    display:block;margin-bottom:12px;letter-spacing:0.08em;
+  }
+  .how-step h3{font-size:1.1rem;margin-bottom:8px;}
+  .how-step p{font-size:0.92rem;color:var(--ink-soft);}
+
+  /* ---------- CONTACT ---------- */
+  .contact{text-align:center;}
+  .contact h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:14px;}
+  .contact p{color:var(--ink-soft);max-width:480px;margin:0 auto 32px;}
+  .contact .cta-row{justify-content:center;}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line);padding:32px 0;}
+  .footer-inner{
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+    font-size:0.85rem;color:var(--ink-soft);
+  }
+  .footer-credit{font-size:0.8rem;color:var(--ink-soft);}
+  .footer-credit a{color:var(--accent);text-decoration:none;font-weight:600;}
+  .footer-credit a:hover{text-decoration:underline;}
+
+  /* ---------- WHATSAPP FLOAT ---------- */
+  .wa-float{
+    position:fixed;bottom:24px;right:24px;z-index:55;
+    width:56px;height:56px;border-radius:50%;background:var(--green);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 10px 30px rgba(54,211,153,0.4);text-decoration:none;
+    transition:transform .2s;
+  }
+  .wa-float:hover{transform:scale(1.08);}
+  .wa-float svg{width:28px;height:28px;color:#0B0D10;}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.is-visible{opacity:1;transform:none;}
+  @media (prefers-reduced-motion: reduce){ .reveal{opacity:1;transform:none;transition:none;} }
+
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--accent);outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PREVIEW BANNER ============ -->
+<div class="preview-bar">
+  👋 Esto es una vista previa de cómo podría verse tu catálogo online — hecha por
+  <a href="https://wa.me/59899238487" target="_blank" rel="noopener">Rafael Gimenez, Web Developer</a>
+</div>
+
+<!-- ============ TOPBAR ============ -->
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a href="#top" class="mark"><span class="dot"></span> iPhonecell.shop.uy</a>
+    <nav class="topnav">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#como-comprar">Cómo comprar</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a class="btn btn-primary" href="https://wa.me/59800000000" target="_blank" rel="noopener">Escribinos</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <span class="eyebrow">iPhones sellados y usados · Uruguay</span>
+      <h1>Tu próximo iPhone,<br>al mejor precio<br><span class="accent">con envío a todo el país</span>.</h1>
+      <p class="lead">
+        Equipos sellados y usados seleccionados, con garantía y +1000 dispositivos vendidos.
+        Elegí tu modelo, consultá disponibilidad y coordinamos el envío.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#catalogo">Ver catálogo</a>
+        <a class="btn btn-ghost" href="https://wa.me/59800000000" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+      </div>
+    </div>
+    <div class="hero-stage reveal">
+      <div class="phone hp-1"><div class="island"></div><div class="screen"><div class="screen-glow"></div></div><div class="home"></div></div>
+      <div class="phone hp-2"><div class="island"></div><div class="screen"><div class="screen-glow"></div></div><div class="home"></div></div>
+      <div class="phone hp-3"><div class="island"></div><div class="screen"><div class="screen-glow"></div></div><div class="home"></div></div>
+      <div class="price-float pf-1">Sellados ✓</div>
+      <div class="price-float pf-2">Hasta 12 cuotas</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="stats">
+  <div class="container">
+    <div class="reveal">
+      <div class="stat-num">+1000</div>
+      <div class="stat-label">Dispositivos vendidos</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-num">13K+</div>
+      <div class="stat-label">Seguidores en Instagram</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-num">19</div>
+      <div class="stat-label">Departamentos con envío</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Equipos revisados</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATALOG ============ -->
+<section id="catalogo">
+  <div class="container">
+    <div class="catalog-head reveal">
+      <div>
+        <span class="eyebrow">Catálogo</span>
+        <h2>Algunos de nuestros equipos</h2>
+      </div>
+      <p>Esta es una muestra con algunos modelos. En la página completa va todo tu catálogo, con stock y precios actualizados.</p>
+    </div>
+    <div class="catalog-grid">
+
+      <div class="pcard reveal">
+        <div class="pcard-top">
+          <div class="phone" style="--pcolor:#1d1d1f;--pscreen:#3a3c40;"><div class="island"></div><div class="screen"><div class="screen-glow"></div></div><div class="home"></div></div>
+        </div>
+        <div class="pcard-badges"><span class="badge badge-sealed">Sellado</span></div>
+        <h3>iPhone 13 · 128GB</h3>
+        <div class="specs">Color medianoche · Batería 100%</div>
+        <div class="price-row">
+          <div class="price">$XXX<small>contado</small></div>
+          <a class="consult" href="https://wa.me/59800000000" target="_blank" rel="noopener">Consultar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="pcard reveal">
+        <div class="pcard-top">
+          <div class="phone" style="--pcolor:#e7e7ea;--pscreen:#ffffff;"><div class="island"></div><div class="screen"><div class="screen-glow"></div></div><div class="home"></div></div>
+        </div>
+        <div class="pcard-badges"><span class="badge badge-used">Usado · Excelente estado</span></div>
+        <h3>iPhone 12 · 128GB</h3>
+        <div class="specs">Color blanco · Batería +85%</div>
+        <div class="price-row">
+          <div class="price">$XXX<small>contado</small></div>
+          <a class="consult" href="https://wa.me/59800000000" target="_blank" rel="noopener">Consultar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="pcard reveal">
+        <div class="pcard-top">
+          <div class="phone" style="--pcolor:#3a5a78;--pscreen:#5d85ac;"><div class="island"></div><div class="screen"><div class="screen-glow"></div></div><div class="home"></div></div>
+        </div>
+        <div class="pcard-badges"><span class="badge badge-sealed">Sellado</span></div>
+        <h3>iPhone 14 · 128GB</h3>
+        <div class="specs">Color azul · Batería 100%</div>
+        <div class="price-row">
+          <div class="price">$XXX<small>contado</small></div>
+          <a class="consult" href="https://wa.me/59800000000" target="_blank" rel="noopener">Consultar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="pcard reveal">
+        <div class="pcard-top">
+          <div class="phone" style="--pcolor:#4f5d4a;--pscreen:#7c8f73;"><div class="island"></div><div class="screen"><div class="screen-glow"></div></div><div class="home"></div></div>
+        </div>
+        <div class="pcard-badges"><span class="badge badge-used">Usado · Buen estado</span></div>
+        <h3>iPhone 11 · 64GB</h3>
+        <div class="specs">Color verde · Batería +80%</div>
+        <div class="price-row">
+          <div class="price">$XXX<small>contado</small></div>
+          <a class="consult" href="https://wa.me/59800000000" target="_blank" rel="noopener">Consultar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="pcard reveal">
+        <div class="pcard-top">
+          <div class="phone" style="--pcolor:#3d3d3f;--pscreen:#5f5f63;"><div class="island"></div><div class="screen"><div class="screen-glow"></div></div><div class="home"></div></div>
+        </div>
+        <div class="pcard-badges"><span class="badge badge-sealed">Sellado</span></div>
+        <h3>iPhone 13 Pro · 256GB</h3>
+        <div class="specs">Color grafito · Batería 100%</div>
+        <div class="price-row">
+          <div class="price">$XXX<small>contado</small></div>
+          <a class="consult" href="https://wa.me/59800000000" target="_blank" rel="noopener">Consultar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="pcard reveal">
+        <div class="pcard-top">
+          <div class="phone" style="--pcolor:#9a2e35;--pscreen:#c4555c;"><div class="island"></div><div class="screen"><div class="screen-glow"></div></div><div class="home"></div></div>
+        </div>
+        <div class="pcard-badges"><span class="badge badge-sealed">Sellado</span></div>
+        <h3>iPhone SE (2022) · 64GB</h3>
+        <div class="specs">Color rojo · Batería 100%</div>
+        <div class="price-row">
+          <div class="price">$XXX<small>contado</small></div>
+          <a class="consult" href="https://wa.me/59800000000" target="_blank" rel="noopener">Consultar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="how" id="como-comprar">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">Cómo comprar</span>
+      <h2>Tan simple como elegir y escribir</h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-step reveal">
+        <span class="num">01</span>
+        <h3>Elegís tu equipo</h3>
+        <p>Mirás el catálogo completo, con modelo, estado, color y precio actualizado.</p>
+      </div>
+      <div class="how-step reveal">
+        <span class="num">02</span>
+        <h3>Consultás disponibilidad</h3>
+        <p>Tocás "Consultar" y te respondemos por WhatsApp con stock y formas de pago.</p>
+      </div>
+      <div class="how-step reveal">
+        <span class="num">03</span>
+        <h3>Coordinamos el envío</h3>
+        <p>Acordamos forma de pago y envío a todo el país, o retiro si estás en Montevideo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact">
+  <div class="container reveal">
+    <span class="eyebrow">¿Tenés dudas?</span>
+    <h2>Escribinos y te asesoramos</h2>
+    <p>Contanos qué modelo estás buscando y te confirmamos stock, precio y forma de pago al toque.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://wa.me/59800000000" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      <a class="btn btn-ghost" href="https://www.instagram.com/iphonecell.shop.uy/" target="_blank" rel="noopener">Ver Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container footer-inner">
+    <span>© 2026 iPhonecell.shop.uy — Envíos a todo Uruguay</span>
+    <span class="footer-credit">Vista previa diseñada por <a href="https://wa.me/59899238487" target="_blank" rel="noopener">Rafael Gimenez</a></span>
+  </div>
+</footer>
+
+<!-- ============ WHATSAPP FLOAT ============ -->
+<a class="wa-float" href="https://wa.me/59800000000" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12a9 9 0 10-4.3 7.7L21 21l-1.2-4.6A9 9 0 0021 12z"/></svg>
+</a>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => observer.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+</script>
+
+</body>
+</html>
